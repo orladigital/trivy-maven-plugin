@@ -55,4 +55,4 @@ The plugin provides the following basic configuration:
 Contributions are welcome! Feel free to fork this repository, create a branch, make the desired changes, and submit a pull request.
 
 ## License
-This plugin is licensed under the MIT License.
+This plugin is licensed under the Apache License 2.0
