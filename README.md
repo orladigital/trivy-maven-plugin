@@ -8,7 +8,6 @@ This plugin utilizes Trivy as a security tool, operating in the background to en
 
 ![maven-trivy-plugin](docs/trivy-maven-scan.png)
 
-
 ## About the Plugin
 The plugin has been created to streamline the task of performing Docker image scans for security vulnerabilities using the Trivy tool.
 
@@ -19,6 +18,8 @@ With this plugin, you can easily integrate security analysis into your Maven dev
 Before using this plugin, please ensure that `Docker` is installed on your system.
 
 The plugin relies on Docker for scanning Docker images.
+
+And `Java 11` +
 
 ## Usage
 Add the Maven plugin to your project's pom.xml file, specifying the required configurations.
@@ -47,10 +48,10 @@ Run the appropriate Maven command to perform Docker image scanning using the plu
 ## Configuration
 The plugin provides the following basic configuration:
 
-* dockerFilePath: path to the Dockerfile. Default: current directory.
-* vulnType: vulnerability types to be analyzed. Default: all vulnerabilities.
-* severity: minimum severity of vulnerabilities to be displayed. Default: all severities.
-* ignoreUnfixed: ignore unfixed vulnerabilities. Default: false.
+* `dockerFilePath`: path to the Dockerfile. Default: current directory.
+* `vulnType`: vulnerability types to be analyzed. Default: all vulnerabilities.
+* `severity`: minimum severity of vulnerabilities to be displayed. Default: all severities.
+* `ignoreUnfixed`: ignore unfixed vulnerabilities. Default: false.
 
 ## Contributing
 Contributions are welcome! Feel free to fork this repository, create a branch, make the desired changes, and submit a pull request.
