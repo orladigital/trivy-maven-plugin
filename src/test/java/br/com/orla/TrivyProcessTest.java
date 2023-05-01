@@ -1,7 +1,6 @@
 package br.com.orla;
 
 import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertTrue;
 
 import br.com.orla.helper.ResourceFileReader;
 import org.junit.jupiter.api.AfterEach;
@@ -24,7 +23,23 @@ public class TrivyProcessTest {
         System.setProperty("os.name", "Linux");
 
         var locationTrivyBin = trivyProcess.getLocationTrivyBin();
-        assertTrue(locationTrivyBin.endsWith("trivy_UNIX_X86_64"));
+        assertEquals("trivy_UNIX_X86_64", locationTrivyBin);
+    }
+
+    @Test
+    public void given_windows_os_should_return_correct_trivy_bin() throws Exception {
+        System.setProperty("os.name", "win");
+
+        var locationTrivyBin = trivyProcess.getLocationTrivyBin();
+        assertEquals("trivy_WINDOWS_X86_64.exe", locationTrivyBin);
+    }
+
+    @Test
+    public void given_macos_os_should_return_correct_trivy_bin() throws Exception {
+        System.setProperty("os.name", "Mac OS X");
+
+        var locationTrivyBin = trivyProcess.getLocationTrivyBin();
+        assertEquals("trivy_MACOS_64", locationTrivyBin);
     }
 
     @Test
@@ -66,6 +81,7 @@ public class TrivyProcessTest {
 
     @AfterEach
     public void tearDown() {
+        System.setProperty("os.name", "Linux");
         dockerProcess.cleanDockerImage("app/todo-api");
     }
 }
