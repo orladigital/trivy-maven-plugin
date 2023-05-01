@@ -2,8 +2,9 @@
 
 This is a Maven plugin developed to simplify the process of scanning Docker images for vulnerabilities using Trivy.
 
-[![CI](https://github.com/orladigital/trivy-maven-plugin/actions/workflows/maven.yml/badge.svg)](https://github.com/orladigital/trivy-maven-plugin/actions/workflows/maven.yml)
+This plugin utilizes Trivy as a security tool, operating in the background to enhance the protection and reliability of our software. Trivy is an open-source vulnerability analysis tool developed by [AquaSecurity](https://github.com/aquasecurity).
 
+[![CI](https://github.com/orladigital/trivy-maven-plugin/actions/workflows/maven.yml/badge.svg)](https://github.com/orladigital/trivy-maven-plugin/actions/workflows/maven.yml)
 
 ![maven-trivy-plugin](docs/trivy-maven-scan.png)
 
