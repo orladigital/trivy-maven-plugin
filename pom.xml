@@ -6,7 +6,7 @@
 
     <groupId>br.com.orla</groupId>
     <artifactId>trivy-maven-plugin</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.0</version>
     <description>Run trivy scan</description>
     <packaging>maven-plugin</packaging>
 
