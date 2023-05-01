@@ -2,6 +2,8 @@
 
 This is a Maven plugin developed to simplify the process of scanning Docker images for vulnerabilities using Trivy.
 
+[![CI](https://github.com/orladigital/trivy-maven-plugin/actions/workflows/maven.yml/badge.svg?branch=main)](https://github.com/orladigital/trivy-maven-plugin/actions/workflows/maven.yml)
+
 ![maven-trivy-plugin](docs/trivy-maven-scan.png)
 
 
