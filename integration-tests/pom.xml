@@ -35,7 +35,6 @@
                     <plugin>
                         <groupId>br.com.orla</groupId>
                         <artifactId>trivy-maven-plugin</artifactId>
-                        <version>1.0.0</version>
                         <configuration>
                             <vulnType>os,library</vulnType>
                             <severity>HIGH,CRITICAL</severity>
