@@ -8,7 +8,11 @@
     <artifactId>trivy-maven-plugin</artifactId>
     <version>1.0.0</version>
     <description>Run trivy scan</description>
-    <packaging>maven-plugin</packaging>
+    <modules>
+        <module>core</module>
+        <module>integration-tests</module>
+    </modules>
+    <packaging>pom</packaging>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>

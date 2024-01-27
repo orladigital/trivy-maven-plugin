@@ -1,0 +1,56 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>br.com.orla</groupId>
+        <artifactId>trivy-maven-plugin</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
+    <groupId>org.example</groupId>
+    <artifactId>integration-tests</artifactId>
+    <packaging>jar</packaging>
+
+    <name>integration-tests</name>
+    <url>http://maven.apache.org</url>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>3.8.1</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <profiles>
+        <profile>
+            <id>dependencyCheck</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>br.com.orla</groupId>
+                        <artifactId>trivy-maven-plugin</artifactId>
+                        <version>1.0.0</version>
+                        <configuration>
+                            <vulnType>os,library</vulnType>
+                            <severity>HIGH,CRITICAL</severity>
+                            <ignoreUnfixed>true</ignoreUnfixed>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>trivy-scan</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+</project>
