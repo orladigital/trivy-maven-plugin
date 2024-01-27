@@ -28,4 +28,5 @@ jobs:
       - name: Trivy Security Scan
         run: |
           cd integration-tests
+          mvn clean -B package  --file pom.xml -DskipTests
           mvn br.com.orla:trivy-maven-plugin:trivy-scan -P dependencyCheck
