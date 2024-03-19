@@ -1,20 +1,24 @@
 package br.com.orla;
 
-import static junit.framework.Assert.assertEquals;
-
+import br.com.orla.api.GithubTrivyRelease;
 import br.com.orla.helper.ResourceFileReader;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import static junit.framework.Assert.assertEquals;
 
 public class TrivyProcessTest {
 
     private TrivyProcess trivyProcess;
     private DockerProcess dockerProcess;
 
+    private GithubTrivyRelease githubTrivyRelease;
+
     @BeforeEach
     public void setUp() {
-        trivyProcess = new TrivyProcess();
+        githubTrivyRelease = new GithubTrivyRelease();
+        trivyProcess = new TrivyProcess(githubTrivyRelease);
         dockerProcess = new DockerProcess();
     }
 
@@ -77,6 +81,30 @@ public class TrivyProcessTest {
         var scanImageExitStatus =
                 trivyProcess.scanImage("app/todo-api-with-vuln", "-s HIGH,CRITICAL --vuln-type library");
         assertEquals(Integer.valueOf(0), scanImageExitStatus);
+    }
+
+    @Test
+    public void when_os_linux_should_return_correct_binary_name() {
+        System.setProperty("os.name", "Linux");
+        var binaryName = trivyProcess.resolveBinaryName("v0.50.0");
+        System.out.println(binaryName);
+        assertEquals("trivy_0.50.0_Linux-64bit.tar.gz", binaryName);
+    }
+
+    @Test
+    public void when_os_windows_should_return_correct_binary_name() {
+        System.setProperty("os.name", "win");
+        var binaryName = trivyProcess.resolveBinaryName("v0.50.0");
+        System.out.println(binaryName);
+        assertEquals("trivy_0.50.0_Windows-64bit.tar.gz", binaryName);
+    }
+
+    @Test
+    public void when_os_mac_should_return_correct_binary_name() {
+        System.setProperty("os.name", "Mac OS X");
+        var binaryName = trivyProcess.resolveBinaryName("v0.50.0");
+        System.out.println(binaryName);
+        assertEquals("trivy_0.50.0_macOS-64bit.tar.gz", binaryName);
     }
 
     @AfterEach

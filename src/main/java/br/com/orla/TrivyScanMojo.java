@@ -1,11 +1,13 @@
 package br.com.orla;
 
-import java.util.ArrayList;
+import br.com.orla.api.GithubTrivyRelease;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.project.MavenProject;
+
+import java.util.ArrayList;
 
 @Mojo(name = "trivy-scan")
 public class TrivyScanMojo extends AbstractMojo {
@@ -32,7 +34,7 @@ public class TrivyScanMojo extends AbstractMojo {
             var defLocationDockerFile = project.getBasedir().getAbsolutePath().concat("/Dockerfile");
             dockerProcess.buildDockerImage(
                     dockerFilePath != null ? dockerFilePath : defLocationDockerFile, project.getArtifactId());
-            var trivyProcess = new TrivyProcess();
+            var trivyProcess = new TrivyProcess(new GithubTrivyRelease());
             try {
                 var params = buildTrivyParams();
                 var exitCode = trivyProcess.scanImage("app/".concat(project.getArtifactId()), params);
