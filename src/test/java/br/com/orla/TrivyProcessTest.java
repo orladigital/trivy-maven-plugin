@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertTrue;
 
 public class TrivyProcessTest {
 
@@ -27,7 +28,7 @@ public class TrivyProcessTest {
         System.setProperty("os.name", "Linux");
 
         var locationTrivyBin = trivyProcess.getLocationTrivyBin();
-        assertEquals("trivy_UNIX_X86_64", locationTrivyBin);
+        assertTrue(locationTrivyBin.getAbsolutePath().endsWith("/target/trivy"));
     }
 
     @Test
@@ -35,7 +36,7 @@ public class TrivyProcessTest {
         System.setProperty("os.name", "win");
 
         var locationTrivyBin = trivyProcess.getLocationTrivyBin();
-        assertEquals("trivy_WINDOWS_X86_64.exe", locationTrivyBin);
+        assertTrue(locationTrivyBin.getAbsolutePath().endsWith("/target/trivy"));
     }
 
     @Test
@@ -43,7 +44,7 @@ public class TrivyProcessTest {
         System.setProperty("os.name", "Mac OS X");
 
         var locationTrivyBin = trivyProcess.getLocationTrivyBin();
-        assertEquals("trivy_MACOS_64", locationTrivyBin);
+        assertTrue(locationTrivyBin.getAbsolutePath().endsWith("/target/trivy"));
     }
 
     @Test

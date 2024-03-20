@@ -13,9 +13,12 @@ import java.io.*;
 import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.logging.Logger;
 import java.util.zip.GZIPInputStream;
 
 public class TrivyProcess extends AbstractOSProcess {
+
+    public static final Logger LOG = Logger.getLogger(TrivyProcess.class.getName());
 
     private final GithubTrivyReleaseApi githubTrivyReleaseApi;
 
@@ -55,6 +58,7 @@ public class TrivyProcess extends AbstractOSProcess {
             inputStream.close();
             return Path.of(targetFilePath);
         } catch (Exception e) {
+            LOG.info("error download trivy binary. Error: ".concat(e.getMessage()));
             System.out.println("error download trivy binary".concat(e.getMessage()));
         }
         throw new RuntimeException("error download binary trivy");
@@ -79,19 +83,21 @@ public class TrivyProcess extends AbstractOSProcess {
                         while ((read = tar.read(buffer)) != -1) {
                             bufferedOutput.write(buffer, 0, read);
                         }
-                        System.out.println("Arquivo copiado com sucesso para: " + binPath);
                         return Path.of(binPath);
                     }
                 }
             }
         } catch (Exception e) {
+            LOG.info("decompress tar.gz failed. Error = " + e.getMessage());
             throw new RuntimeException(e);
         }
         throw new RuntimeException("decompress tar gz failed");
     }
 
     public File getLocationTrivyBin() throws Exception {
-        // TODO: adicionar download/criar temp dir
+        var fileAlreadyExists = getBinFileIfAlreadyExists();
+        if (fileAlreadyExists != null) return fileAlreadyExists;
+
         var tag = "v0.49.1";
         var release = githubTrivyReleaseApi.releaseByTag(tag);
         var resolveBinaryName = resolveBinaryName(tag);
@@ -100,17 +106,28 @@ public class TrivyProcess extends AbstractOSProcess {
                 .filter(asset -> asset.getName().equals(resolveBinaryName))
                 .findFirst();
 
-        System.out.println("start download tar.gz");
+        LOG.info("Start download trivy binary from github. binary_name: ".concat(resolveBinaryName));
+
         var pathFile = downloadBinaryFromGithubAssets(donwloadURl.get().getBrowserDownloadUrl(), resolveBinaryName);
-        System.out.println("end download tar.gz");
-        System.out.println("start decompress");
+        LOG.info("Download finished");
+
+        LOG.info("Start decompress tar.gz");
         var binFile = decompressTarGz(pathFile);
-        System.out.println("end decompress");
+        LOG.info("Decompress finished");
 
         var fileBin = new File(binFile.toAbsolutePath().toString());
         fileBin.setExecutable(true);
 
         return fileBin;
+    }
+
+    private File getBinFileIfAlreadyExists() {
+        var targetPath = Paths.get("").toAbsolutePath() + "/target/trivy";
+        var binFile = new File(targetPath);
+        if (binFile.exists()) {
+            return binFile;
+        }
+        return null;
     }
 
     public File extractExecutableFromJar(String executable) throws IOException {
