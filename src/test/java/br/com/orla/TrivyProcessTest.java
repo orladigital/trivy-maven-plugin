@@ -11,6 +11,8 @@ import static junit.framework.Assert.assertTrue;
 
 public class TrivyProcessTest {
 
+    private static final String TRIVY_TAG = "v0.49.1";
+
     private TrivyProcess trivyProcess;
     private DockerProcess dockerProcess;
 
@@ -27,7 +29,7 @@ public class TrivyProcessTest {
     public void given_unix_os_should_return_correct_trivy_bin() throws Exception {
         System.setProperty("os.name", "Linux");
 
-        var locationTrivyBin = trivyProcess.getLocationTrivyBin();
+        var locationTrivyBin = trivyProcess.getLocationTrivyBin(TRIVY_TAG);
         assertTrue(locationTrivyBin.getAbsolutePath().endsWith("/target/trivy"));
     }
 
@@ -35,7 +37,7 @@ public class TrivyProcessTest {
     public void given_windows_os_should_return_correct_trivy_bin() throws Exception {
         System.setProperty("os.name", "win");
 
-        var locationTrivyBin = trivyProcess.getLocationTrivyBin();
+        var locationTrivyBin = trivyProcess.getLocationTrivyBin(TRIVY_TAG);
         assertTrue(locationTrivyBin.getAbsolutePath().endsWith("/target/trivy"));
     }
 
@@ -43,7 +45,7 @@ public class TrivyProcessTest {
     public void given_macos_os_should_return_correct_trivy_bin() throws Exception {
         System.setProperty("os.name", "Mac OS X");
 
-        var locationTrivyBin = trivyProcess.getLocationTrivyBin();
+        var locationTrivyBin = trivyProcess.getLocationTrivyBin(TRIVY_TAG);
         assertTrue(locationTrivyBin.getAbsolutePath().endsWith("/target/trivy"));
     }
 
@@ -52,7 +54,7 @@ public class TrivyProcessTest {
         var dockerFile = ResourceFileReader.loadFile("Dockerfile");
         dockerProcess.buildDockerImage(dockerFile.getAbsolutePath(), "todo-api");
 
-        var scanImageExitStatus = trivyProcess.scanImage("app/todo-api", "");
+        var scanImageExitStatus = trivyProcess.scanImage("app/todo-api", "", TRIVY_TAG);
         assertEquals(Integer.valueOf(0), scanImageExitStatus);
     }
 
@@ -61,7 +63,7 @@ public class TrivyProcessTest {
         var dockerFile = ResourceFileReader.loadFile("Dockerfile-with-vuln");
         dockerProcess.buildDockerImage(dockerFile.getAbsolutePath(), "todo-api-with-vuln");
 
-        var scanImageExitStatus = trivyProcess.scanImage("app/todo-api-with-vuln", "");
+        var scanImageExitStatus = trivyProcess.scanImage("app/todo-api-with-vuln", "", TRIVY_TAG);
         assertEquals(Integer.valueOf(1), scanImageExitStatus);
     }
 
@@ -70,7 +72,7 @@ public class TrivyProcessTest {
         var dockerFile = ResourceFileReader.loadFile("Dockerfile-with-vuln");
         dockerProcess.buildDockerImage(dockerFile.getAbsolutePath(), "todo-api-with-vuln");
 
-        var scanImageExitStatus = trivyProcess.scanImage("app/todo-api-with-vuln", "-s LOW");
+        var scanImageExitStatus = trivyProcess.scanImage("app/todo-api-with-vuln", "-s LOW", TRIVY_TAG);
         assertEquals(Integer.valueOf(0), scanImageExitStatus);
     }
 
@@ -80,7 +82,7 @@ public class TrivyProcessTest {
         dockerProcess.buildDockerImage(dockerFile.getAbsolutePath(), "todo-api-with-vuln");
 
         var scanImageExitStatus =
-                trivyProcess.scanImage("app/todo-api-with-vuln", "-s HIGH,CRITICAL --vuln-type library");
+                trivyProcess.scanImage("app/todo-api-with-vuln", "-s HIGH,CRITICAL --vuln-type library", TRIVY_TAG);
         assertEquals(Integer.valueOf(0), scanImageExitStatus);
     }
 

@@ -94,13 +94,12 @@ public class TrivyProcess extends AbstractOSProcess {
         throw new RuntimeException("decompress tar gz failed");
     }
 
-    public File getLocationTrivyBin() throws Exception {
+    public File getLocationTrivyBin(String trivyTag) throws Exception {
         var fileAlreadyExists = getBinFileIfAlreadyExists();
         if (fileAlreadyExists != null) return fileAlreadyExists;
 
-        var tag = "v0.49.1";
-        var release = githubTrivyReleaseApi.releaseByTag(tag);
-        var resolveBinaryName = resolveBinaryName(tag);
+        var release = githubTrivyReleaseApi.releaseByTag(trivyTag);
+        var resolveBinaryName = resolveBinaryName(trivyTag);
 
         var donwloadURl = release.getAssets().stream()
                 .filter(asset -> asset.getName().equals(resolveBinaryName))
@@ -142,9 +141,9 @@ public class TrivyProcess extends AbstractOSProcess {
         return command;
     }
 
-    public Integer scanImage(String dockerImageName, String trivyParams) throws Exception {
+    public Integer scanImage(String dockerImageName, String trivyParams, String trivyTag) throws Exception {
         var command = "%s image --exit-code 1 %s %s";
-        var bin = getLocationTrivyBin();
+        var bin = getLocationTrivyBin(trivyTag);
         var finalCommand = String.format(command, bin.getAbsolutePath(), trivyParams, dockerImageName);
         return execProcess(finalCommand, true);
     }
