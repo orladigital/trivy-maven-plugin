@@ -1,13 +1,13 @@
 package br.com.orla;
 
+import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertTrue;
+
 import br.com.orla.api.GithubTrivyRelease;
 import br.com.orla.helper.ResourceFileReader;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertTrue;
 
 public class TrivyProcessTest {
 

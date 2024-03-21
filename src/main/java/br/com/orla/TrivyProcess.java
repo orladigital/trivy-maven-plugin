@@ -5,16 +5,15 @@ import br.com.orla.utils.OS;
 import br.com.orla.utils.OSDetector;
 import com.google.common.io.Files;
 import com.google.common.io.Resources;
-import org.apache.commons.compress.archivers.tar.TarArchiveEntry;
-import org.apache.commons.compress.archivers.tar.TarArchiveInputStream;
-import org.codehaus.plexus.util.FileUtils;
-
 import java.io.*;
 import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.logging.Logger;
 import java.util.zip.GZIPInputStream;
+import org.apache.commons.compress.archivers.tar.TarArchiveEntry;
+import org.apache.commons.compress.archivers.tar.TarArchiveInputStream;
+import org.codehaus.plexus.util.FileUtils;
 
 public class TrivyProcess extends AbstractOSProcess {
 
@@ -77,7 +76,7 @@ public class TrivyProcess extends AbstractOSProcess {
                     String binPath = targetDirectoryPath + "/trivy";
 
                     try (OutputStream fileOutput = java.nio.file.Files.newOutputStream(Path.of(binPath));
-                         BufferedOutputStream bufferedOutput = new BufferedOutputStream(fileOutput)) {
+                            BufferedOutputStream bufferedOutput = new BufferedOutputStream(fileOutput)) {
                         byte[] buffer = new byte[1024];
                         int read;
                         while ((read = tar.read(buffer)) != -1) {

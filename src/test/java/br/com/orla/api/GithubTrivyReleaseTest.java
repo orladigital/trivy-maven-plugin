@@ -1,11 +1,10 @@
 package br.com.orla.api;
 
+import static junit.framework.Assert.assertNotNull;
+import static junit.framework.Assert.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import static junit.framework.Assert.assertNotNull;
-import static junit.framework.Assert.assertTrue;
 
 class GithubTrivyReleaseTest {
 
@@ -27,7 +26,6 @@ class GithubTrivyReleaseTest {
         var release = githubTrivyRelease.releaseByTag("v0.49.1");
         assertNotNull(release.getAssets().get(0).getName());
     }
-
 
     @Test
     public void shouldReturnDownloadUrlj() {

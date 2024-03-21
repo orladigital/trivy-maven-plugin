@@ -1,13 +1,12 @@
 package br.com.orla;
 
 import br.com.orla.api.GithubTrivyRelease;
+import java.util.ArrayList;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.project.MavenProject;
-
-import java.util.ArrayList;
 
 @Mojo(name = "trivy-scan")
 public class TrivyScanMojo extends AbstractMojo {
