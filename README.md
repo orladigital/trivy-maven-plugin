@@ -33,6 +33,7 @@ Add the Maven plugin to your project's pom.xml file, specifying the required con
         <vulnType>os,library</vulnType>
         <severity>HIGH,CRITICAL</severity>
         <ignoreUnfixed>true</ignoreUnfixed>
+        <trivyVersion>v0.49.1</trivyVersion>
     </configuration>
     <executions>
         <execution>
@@ -52,6 +53,7 @@ The plugin provides the following basic configuration:
 * `vulnType`: vulnerability types to be analyzed. Default: all vulnerabilities.
 * `severity`: minimum severity of vulnerabilities to be displayed. Default: all severities.
 * `ignoreUnfixed`: ignore unfixed vulnerabilities. Default: false.
+* `trivyVersion`: choose trivy version. Default: v0.49.1.
 
 ## Contributing
 Contributions are welcome! Feel free to fork this repository, create a branch, make the desired changes, and submit a pull request.

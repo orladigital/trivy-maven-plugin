@@ -1,5 +1,6 @@
 package br.com.orla;
 
+import br.com.orla.api.GithubTrivyRelease;
 import java.util.ArrayList;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
@@ -25,6 +26,9 @@ public class TrivyScanMojo extends AbstractMojo {
     @Parameter(required = false, defaultValue = "false")
     private Boolean ignoreUnfixed;
 
+    @Parameter(required = false, defaultValue = "v0.49.1")
+    private String trivyVersion;
+
     @Override
     public void execute() throws MojoExecutionException {
         var dockerProcess = new DockerProcess();
@@ -32,10 +36,10 @@ public class TrivyScanMojo extends AbstractMojo {
             var defLocationDockerFile = project.getBasedir().getAbsolutePath().concat("/Dockerfile");
             dockerProcess.buildDockerImage(
                     dockerFilePath != null ? dockerFilePath : defLocationDockerFile, project.getArtifactId());
-            var trivyProcess = new TrivyProcess();
+            var trivyProcess = new TrivyProcess(new GithubTrivyRelease());
             try {
                 var params = buildTrivyParams();
-                var exitCode = trivyProcess.scanImage("app/".concat(project.getArtifactId()), params);
+                var exitCode = trivyProcess.scanImage("app/".concat(project.getArtifactId()), params, trivyVersion);
                 if (exitCode == 1) {
                     throw new MojoExecutionException("your app have some vulnerabilities");
                 }
