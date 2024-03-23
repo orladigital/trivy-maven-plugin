@@ -1,10 +1,10 @@
-package br.com.orla;
+package tech.orla;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertTrue;
 
-import br.com.orla.api.GithubTrivyRelease;
-import br.com.orla.helper.ResourceFileReader;
+import tech.orla.api.GithubTrivyRelease;
+import tech.orla.helper.ResourceFileReader;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

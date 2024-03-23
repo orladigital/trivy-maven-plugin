@@ -1,4 +1,4 @@
-package br.com.orla.api;
+package tech.orla.api;
 
 import com.alibaba.fastjson.annotation.JSONField;
 

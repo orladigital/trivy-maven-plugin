@@ -1,4 +1,4 @@
-package br.com.orla.helper;
+package tech.orla.helper;
 
 import java.io.File;
 import java.net.URL;

@@ -1,9 +1,9 @@
-package br.com.orla;
+package tech.orla;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import br.com.orla.helper.ResourceFileReader;
+import tech.orla.helper.ResourceFileReader;
 import org.junit.jupiter.api.*;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
@@ -20,7 +20,7 @@ class DockerProcessTest {
     @Order(1)
     public void should_return_true() {
         var existsDocker = dockerProcess.isDockerInstalled();
-        assertTrue(existsDocker);
+        Assertions.assertTrue(existsDocker);
     }
 
     @Test

@@ -1,6 +1,6 @@
-package br.com.orla;
+package tech.orla;
 
-import br.com.orla.api.GithubTrivyRelease;
+import tech.orla.api.GithubTrivyRelease;
 import java.util.ArrayList;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;

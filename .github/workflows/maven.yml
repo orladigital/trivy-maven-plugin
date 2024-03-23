@@ -26,4 +26,4 @@ jobs:
         run: mvn clean install
 
       - name: Trivy Security Scan
-        run: mvn br.com.orla:trivy-maven-plugin:trivy-scan
+        run: mvn tech.orla:trivy-maven-plugin:trivy-scan

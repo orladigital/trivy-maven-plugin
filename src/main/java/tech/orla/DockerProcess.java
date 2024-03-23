@@ -1,4 +1,4 @@
-package br.com.orla;
+package tech.orla;
 
 public class DockerProcess extends AbstractOSProcess {
 

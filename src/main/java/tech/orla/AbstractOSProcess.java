@@ -1,4 +1,4 @@
-package br.com.orla;
+package tech.orla;
 
 import java.io.BufferedReader;
 import java.io.IOException;

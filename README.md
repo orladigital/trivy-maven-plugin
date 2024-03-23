@@ -26,9 +26,9 @@ Add the Maven plugin to your project's pom.xml file, specifying the required con
 
 ```xml
 <plugin>
-    <groupId>br.com.orla</groupId>
+    <groupId>tech.orla</groupId>
     <artifactId>trivy-maven-plugin</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>${LATEST_VERSION}</version>
     <configuration>
         <vulnType>os,library</vulnType>
         <severity>HIGH,CRITICAL</severity>
@@ -44,7 +44,7 @@ Add the Maven plugin to your project's pom.xml file, specifying the required con
     </executions>
 </plugin>
 ```
-Run the appropriate Maven command to perform Docker image scanning using the plugin. For example, `mvn br.com.orla:trivy-maven-plugin:trivy-scan`
+Run the appropriate Maven command to perform Docker image scanning using the plugin. For example, `mvn tech.orla:trivy-maven-plugin:trivy-scan`
 
 ## Configuration
 The plugin provides the following basic configuration:
