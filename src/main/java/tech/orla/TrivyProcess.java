@@ -1,8 +1,5 @@
-package br.com.orla;
+package tech.orla;
 
-import br.com.orla.api.GithubTrivyReleaseApi;
-import br.com.orla.utils.OS;
-import br.com.orla.utils.OSDetector;
 import com.google.common.io.Files;
 import com.google.common.io.Resources;
 import java.io.*;
@@ -14,6 +11,9 @@ import java.util.zip.GZIPInputStream;
 import org.apache.commons.compress.archivers.tar.TarArchiveEntry;
 import org.apache.commons.compress.archivers.tar.TarArchiveInputStream;
 import org.codehaus.plexus.util.FileUtils;
+import tech.orla.api.GithubTrivyReleaseApi;
+import tech.orla.utils.OS;
+import tech.orla.utils.OSDetector;
 
 public class TrivyProcess extends AbstractOSProcess {
 

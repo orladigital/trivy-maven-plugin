@@ -1,4 +1,4 @@
-package br.com.orla.utils;
+package tech.orla.utils;
 
 import static junit.framework.Assert.assertEquals;
 

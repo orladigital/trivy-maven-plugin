@@ -4,11 +4,17 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>br.com.orla</groupId>
+    <groupId>tech.orla</groupId>
     <artifactId>trivy-maven-plugin</artifactId>
-    <version>1.0.0</version>
-    <description>Run trivy scan</description>
+    <version>1.0.1</version>
     <packaging>maven-plugin</packaging>
+
+    <name>${project.groupId}:${project.artifactId}</name>
+    <description>
+        This is a Maven plugin developed to simplify the process of scanning Docker images for vulnerabilities using
+        Trivy.
+    </description>
+    <url>https://github.com/orladigital/trivy-maven-plugin</url>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
@@ -16,6 +22,27 @@
         <maven.compiler.release>11</maven.compiler.release>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+
+    <licenses>
+        <license>
+            <name>The Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <name>Jose Neto</name>
+            <email>jose.neto@orla.tech</email>
+            <organization>Orla</organization>
+            <organizationUrl>https://github.com/orladigital</organizationUrl>
+        </developer>
+    </developers>
+    <scm>
+        <connection>scm:git:git://github.com/orladigital/trivy-maven-plugin.git</connection>
+        <developerConnection>scm:git:ssh://github.com:orladigital/trivy-maven-plugin.git</developerConnection>
+        <url>http://github.com/orladigital/trivy-maven-plugin/tree/main</url>
+    </scm>
 
     <dependencies>
         <dependency>
@@ -68,6 +95,32 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.2.5</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>2.2.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.9.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <groupId>com.diffplug.spotless</groupId>

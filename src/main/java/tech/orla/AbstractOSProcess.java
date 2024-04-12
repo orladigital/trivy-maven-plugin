@@ -1,4 +1,4 @@
-package br.com.orla;
+package tech.orla;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -17,6 +17,19 @@ public abstract class AbstractOSProcess {
                 while ((linha = reader.readLine()) != null) {
                     System.out.println(linha);
                 }
+
+                inputStream.close();
+                reader.close();
+
+                InputStream errorStream = process.getErrorStream();
+                BufferedReader errorReader = new BufferedReader(new InputStreamReader(errorStream));
+                String errorLine;
+                while ((errorLine = errorReader.readLine()) != null) {
+                    System.out.println(errorLine);
+                }
+
+                errorStream.close();
+                errorReader.close();
             }
             return process.waitFor();
         } catch (IOException | InterruptedException e) {

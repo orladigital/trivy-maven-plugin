@@ -1,4 +1,4 @@
-package br.com.orla.api;
+package tech.orla.api;
 
 import static junit.framework.Assert.assertNotNull;
 import static junit.framework.Assert.assertTrue;

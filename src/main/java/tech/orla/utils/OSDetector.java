@@ -1,4 +1,4 @@
-package br.com.orla.utils;
+package tech.orla.utils;
 
 public class OSDetector {
 

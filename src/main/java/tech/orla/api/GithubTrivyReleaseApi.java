@@ -1,4 +1,4 @@
-package br.com.orla.api;
+package tech.orla.api;
 
 public interface GithubTrivyReleaseApi {
 

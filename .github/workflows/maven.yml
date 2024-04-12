@@ -25,5 +25,12 @@ jobs:
       - name: Tests
         run: mvn clean install
 
+      - name: Get project version from pom.xml
+        id: get_version
+        run: |
+          VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+          echo "::set-output name=version::$VERSION"
+
       - name: Trivy Security Scan
-        run: mvn br.com.orla:trivy-maven-plugin:trivy-scan
+        run: |
+          mvn tech.orla:trivy-maven-plugin:${{ steps.get_version.outputs.version }}:trivy-scan

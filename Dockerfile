@@ -1,4 +1,4 @@
-FROM eclipse-temurin:8u402-b06-jre-alpine
+FROM amazoncorretto:latest
 
 ADD target/*.jar /opt/app.jar
 CMD ["java", "-jar", "/opt/app.jar"]
