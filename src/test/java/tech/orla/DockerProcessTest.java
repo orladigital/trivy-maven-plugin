@@ -1,10 +1,9 @@
 package tech.orla;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import tech.orla.helper.ResourceFileReader;
 import org.junit.jupiter.api.*;
+import tech.orla.helper.ResourceFileReader;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class DockerProcessTest {
